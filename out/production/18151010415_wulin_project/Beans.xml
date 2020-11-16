@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context.xsd
+                        http://www.springframework.org/schema/aop
+                        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="book1" class="com.Data.Book">
+        <property name="isbn" value="7-505-37908-0"/>
+        <property name="sm" value="book1"/>
+        <property name="zz" value="张三"/>
+        <property name="cbs" value="某某出版社"/>
+        <property name="jg" value="35"/>
+        <property name="fbl" value="11"/>
+        <property name="kcl" value="5"/>
+    </bean>
+
+    <bean id="book2" class="com.Data.Book">
+        <property name="isbn" value="7-302-03035-9"/>
+        <property name="sm" value="book1"/>
+        <property name="zz" value="张三2"/>
+        <property name="cbs" value="某某出版社2"/>
+        <property name="jg" value="35"/>
+        <property name="fbl" value="11"/>
+        <property name="kcl" value="5"/>
+    </bean>
+
+    <bean id="service" class="com.Service.BookService">
+        <property name="bookDao" ref="BookDao"/>
+    </bean>
+
+    <bean id="BookDao" class="com.Dao.BookDao">
+        <property name="jdbc" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="datasource"/>
+    </bean>
+
+    <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/xsbook?useUnicode=true&amp;characterEncoding=utf8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
+
+    <bean id="InstanceFactory" class="com.Factory.InstanceFactory" />
+    <bean id="InstanceBookService" factory-method="getService" factory-bean="InstanceFactory">
+        <constructor-arg value="instance">
+
+        </constructor-arg>
+    </bean>
+
+    <bean id="EnglishBook" class="com.Data.Book">
+        <property name="isbn" value="7-505-23456-0"/>
+        <property name="sm" value="英语书"/>
+        <property name="zz" value="李四"/>
+        <property name="cbs" value="某某出版社"/>
+        <property name="jg" value="35"/>
+        <property name="fbl" value="11"/>
+        <property name="kcl" value="5"/>
+    </bean>
+
+
+    <bean id="logger" class="com.Aop.Advice"/>
+    <aop:config>
+        <aop:aspect id="loggerbefor" ref="logger">
+            <aop:pointcut id="logpointcut" expression="execution(* com.Dao.*.*(..))"/>
+            <aop:before method="BeforeLog" pointcut-ref="logpointcut"/>
+            <aop:after method="AfterAdvice" pointcut-ref="logpointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="Log" class="com.Aop.Log"/>
+    <aop:config>
+        <aop:aspect id="LogAspect" ref="Log">
+            <aop:pointcut id="LogPc" expression="execution(* com.Dao.BookDao.*(..))"/>
+            <aop:before method="BeforeLog" pointcut-ref="LogPc"/>
+            <aop:after method="AfterLog" pointcut-ref="LogPc"/>
+            <aop:after-returning method="ReturnLog" pointcut-ref="LogPc"/>
+            <aop:after-throwing method="ThrowLog" pointcut-ref="LogPc"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
+
+
