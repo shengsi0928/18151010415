@@ -5,15 +5,13 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-@Repository("StdDao")
-//@Component()
+@Repository
 public class StudentDao implements StudentDaoImpl{
     @Override
     public int AddStudent(Student temp_std) {
@@ -44,7 +42,6 @@ public class StudentDao implements StudentDaoImpl{
         try{
             update_state = session.update("updateStudent", temp_std);
             session.commit();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -110,6 +107,9 @@ public class StudentDao implements StudentDaoImpl{
                 if(std!=null){
                     System.out.println(std.toString());
                 }
+                else{
+                    System.out.println("查不到学生！");
+                }
             }
         } finally {
             session.close();
@@ -139,7 +139,7 @@ public class StudentDao implements StudentDaoImpl{
         SqlSession session = GetSession();
         Student std;
         try {
-            std= session.selectOne(
+            std = session.selectOne(
                     "selectByjszh", jszh);
 
         } finally {

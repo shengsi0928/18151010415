@@ -1,6 +1,5 @@
 package com.Service;
 
-import com.Dao.BookDaoImpl;
 import com.Data.Book;
 
 public interface BookServiceImpl {
@@ -8,15 +7,18 @@ public interface BookServiceImpl {
 
     public void EditBook(Book book, Book book2);
 
-    public void Editbook(String isbn, String sm);
+    public void DeleteBookByName(String bookname);
 
-    public void DeleteBook(Book book);
+    public void DeleteBookByisbn(String isbn);
 
-    public void SelectBook(Book book);
+    public void SelectAllBook();
 
     public void SelectTempBook(String BookName);
 
-    public BookDaoImpl getBookDao();
+    public void SelectBookByIsbn(String isbn);
 
-    public void setBookDao(BookDaoImpl bookDaoImpl);
+    public void SelectBookByName(String name);
+
+    public void SelectStudentByBookName(String BookName);
+
 }

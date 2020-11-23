@@ -1,29 +1,30 @@
 package com.Service;
 
 import com.Dao.BookDao;
-import com.Dao.BookDaoImpl;
 import com.Data.Book;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
-
-@Service("service")
+@Service
 public class BookService implements BookServiceImpl {
+
     @Autowired
-    private BookDaoImpl bookDao;
+    BookDao bookDao;
 
-//    setter and getter
-
-    public BookDaoImpl getBookDao() {
-        return bookDao;
+    @Override
+    public void SelectBookByIsbn(String isbn) {
+        bookDao.SelectBookByIsbn(isbn);
     }
 
-    public void setBookDao(BookDaoImpl bookDaoImpl) {
-        this.bookDao = bookDaoImpl;
+    @Override
+    public void SelectBookByName(String name) {
+        bookDao.SelectBookByName(name);
     }
 
+    @Override
+    public void SelectStudentByBookName(String BookName) {
+        bookDao.SelectStudentByBookName(BookName);
+    }
 
     @Override
     public void AddBook(Book book) {
@@ -36,18 +37,21 @@ public class BookService implements BookServiceImpl {
     }
 
     @Override
-    public void Editbook(String isbn, String sm) {
-        bookDao.EditBook(isbn, sm);
+    public void DeleteBookByName(String bookname) {
+        bookDao.DeleteBookByName(bookname);
+
     }
 
     @Override
-    public void DeleteBook(Book book) {
-        bookDao.DeleteBook(book);
+    public void DeleteBookByisbn(String isbn) {
+        bookDao.DeleteBookByName(isbn);
+
     }
 
+
     @Override
-    public void SelectBook(Book book) {
-        bookDao.SelectBook(book);
+    public void SelectAllBook() {
+        bookDao.SelectAllBook();
     }
 
     @Override

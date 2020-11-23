@@ -1,0 +1,42 @@
+<?sml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.Data">
+    <select id="selectBookByisbn" parameterType="String" resultType="Book">
+        select * from book where isbn = #{is}
+    </select>
+
+    <select id="selectBookByName" parameterType="string" resultType="Book">
+        select * from book where sm like '%${value}%'
+    </select>
+
+    <select id="selectStudentByBookName" parameterType="string" resultType="Student">
+        select * from student where jszh in (select jszh from jyls where isbn in (select isbn from book where sm =#{name}))
+    </select>
+
+    <select id="updateBook" parameterType="Book" resultType="Book">
+        update book set sm = #{sm}, zz = #{zz} where isbn = #{isbn}
+    </select>
+
+    <select id="selectAllBook" resultType="Book">
+        select * from book
+    </select>
+
+    <select id="deleteBookByisbn" parameterType="string">
+        delete from book where isbn = #{isbn};
+    </select>
+
+    <select id="deleteBookByName" parameterType="string">
+        delete from book where sm = #{sm};
+    </select>
+
+    <select id="insertBook" parameterType="Book" resultType="Book">
+        insert into book (isbn, sm, zz, cbs, jg, fbl) value (#{Book.isbn}, #{Book.sm}, #{Book.zz}, #{Book.cbs}, #{Book.jg}, #{Book.fbl})
+    </select>
+
+    <select id="insertBook2" parameterType="Book" resultType="Book">
+        insert into book (isbn, sm, zz, cbs, jg, fbl) value (#{isbn}, #{sm}, #{zz}, #{cbs}, #{jg}, #{fbl})
+    </select>
+</mapper>
+

@@ -1,6 +1,5 @@
 package com.Data;
 
-import org.springframework.jdbc.core.RowCallbackHandler;
 
 public class Book {
     private String isbn;
@@ -89,7 +88,7 @@ public class Book {
         this.kcl = kcl;
     }
 
-    public String GetInf(){
+    public String toString(){
         return "Book : isbn= " + isbn + " sm= " + sm + " cbs= " + cbs + " jg= " + jg +
                 " fbl= " + fbl + " Kcl= " + kcl ;
     }

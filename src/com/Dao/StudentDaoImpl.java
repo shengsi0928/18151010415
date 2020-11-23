@@ -2,7 +2,6 @@ package com.Dao;
 
 import com.Data.Student;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 
 import java.util.List;
 

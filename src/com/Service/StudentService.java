@@ -1,22 +1,16 @@
 package com.Service;
 
 import com.Dao.StudentDao;
-import com.Dao.StudentDaoImpl;
 import com.Data.Student;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-//@Component
 public class StudentService implements StudentServiceImpl{
 
     @Autowired
-    @Qualifier("StdDao")
     StudentDao studentDao;
 
 

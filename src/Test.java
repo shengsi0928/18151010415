@@ -1,12 +1,6 @@
-import com.Config;
-import com.Dao.StudentDao;
-import com.Data.Book;
-import com.Data.Student;
 import com.Service.BookServiceImpl;
 import com.Service.StudentService;
-import com.Service.StudentServiceImpl;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.Service.BookService;
 
@@ -14,7 +8,7 @@ public class Test {
     public void test(){
         ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{   "Beans.xml" });
 
-        ApplicationContext context1 = new AnnotationConfigApplicationContext(Config.class);
+//        ApplicationContext context1 = new AnnotationConfigApplicationContext(Config.class);
 
 //        BookService bs = context1.getBean("ChineseBookService", BookService.class);
 //        bs.AddBook();
@@ -24,26 +18,16 @@ public class Test {
 //        JdbcTemplate jdbc = (JdbcTemplate)context.getBean("jdbcTemplate", JdbcTemplate.class);
 //        BookDao dao = context.getBean("BookImpl", BookDao.class);
         BookServiceImpl service = context.getBean("service", BookService.class);
-        Book book = context.getBean("book1", Book.class);
-        Book book2 = context.getBean("book2", Book.class);
-//        Book book3 = book;
-//        book3.setSm("sbsshs");
-//        book3.setZz("hfdjsahfkahls");
-        Student std = new Student();
-        std.setJszh("20000001");
-        std.setXm("李大丽");
-        std.setXb((byte)1);
-        std.setZym("英语");
-        std.setJss("1");
-        std.setCssj("1982-01-09 00:00:00");
-        StudentService studentService = new StudentService();
-        studentService.SelectStudentByName("李");
-        studentService.DeleteStudentByjszh("20000001");
-        studentService.AddStudent(std);
-        studentService.SelectStudentByName("李");
-//        Student std = studentDao.SelectStudentByjszhParam("20000001");
+        StudentService studentService = context.getBean("StudentService", StudentService.class);
+
+//        studentService.DeleteStudentByjszh("20000001");
+//        studentService.AddStudent(std);
+//        studentService.SelectStudentByName("李");
+//        Student std2 = studentService.SelectStudentByjszhParam("20000001");
+//        studentService.SelectStudentByName("xx");
+
+//        service.SelectBookByName("");
 //
-//        System.out.println(std.toString());
 //        std.setXm("李大丽");
 //        studentDao.EditStudent(std);
 //        std = studentDao.SelectStudentByjszhParam("20000001");
