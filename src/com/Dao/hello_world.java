@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class hello_world {
     private static SqlSessionFactory sqlSessionFactory;
@@ -32,11 +34,13 @@ public class hello_world {
         // TODO Auto-generated method stub
         SqlSession session = sqlSessionFactory.openSession();
         try {
-            Student user = (Student) session.selectOne(
-                    "selectByid", 10000001);
-            if(user!=null){
-                String userInfo = "名字："+user.getXm()+", 所属部门："+user.getJss()+", 主页："+user.getXb();
-                System.out.println(userInfo);
+            List<Student> user = session.selectList(
+                    "selectByName", "李");
+            for(Student std:user){
+                if(std!=null){
+//                    String userInfo = "名字："+std.getXm()+", 所属部门："+std.getJss()+", 主页："+std.getXb();
+                    System.out.println(std.toString());
+                }
             }
         } finally {
             session.close();

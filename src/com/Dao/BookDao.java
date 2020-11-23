@@ -2,6 +2,8 @@ package com.Dao;
 
 import com.Data.Book;
 import com.Data.Student;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import java.io.Reader;
 import java.sql.ResultSet;
 import java.util.List;
 
@@ -18,6 +21,22 @@ public class BookDao implements BookDaoImpl {
 
     @Autowired
     JdbcTemplate jdbc;
+
+
+    private static SqlSessionFactory sqlSessionFactory;
+    private static Reader reader;
+
+    private static final org.apache.ibatis.io.Resources Resources = null;
+
+    static {
+        try {
+            reader = Resources.getResourceAsReader("SqlMapConfig.xml");
+            sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void AddBook(Book book) {

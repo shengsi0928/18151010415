@@ -5,10 +5,20 @@ public class Student {
     private String jszh;
     private String xm;
     private String zym;
-    private String xb;
+    private byte xb;
     private String cssj;
     private String jss;
     private String zp;
+
+    public Student() {
+
+    }
+
+    public Student(String jszh, String xm, String zym){
+        this.jszh = jszh;
+        this.xm = xm;
+        this.zym = zym;
+    }
     public String getJszh() {
         return jszh;
     }
@@ -25,11 +35,11 @@ public class Student {
         this.xm = xm;
     }
 
-    public String getXb() {
+    public byte getXb() {
         return xb;
     }
 
-    public void setXb(String xb) {
+    public void setXb(byte xb) {
         this.xb = xb;
     }
 

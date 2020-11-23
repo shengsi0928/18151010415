@@ -7,5 +7,36 @@
         select * from student where jszh = #{is}
     </select>
 
+    <select id="selectByName" parameterType="string" resultType="Student">
+        select * from student where xm like '%${value}%'
+    </select>
+
+    <select id="selectByjszh" parameterType="string" resultType="Student">
+        select * from student where jszh = #{is}
+    </select>
+
+    <select id="updateStudent" parameterType="Student" resultType="Student">
+        update student set xm = #{xm}, zym = #{zym} where jszh = #{jszh}
+    </select>
+    
+    <select id="deleteStudentByjszh" parameterType="string">
+        delete from student where jszh = #{jszh};
+    </select>
+
+    <select id="selectStudent" resultType="arraylist">
+        select * from student
+    </select>
+
+    <select id="deleteStudentByName" parameterType="string">
+        delete from student where xm = #{xm};
+    </select>
+
+    <select id="insertStudent" parameterType="Student" resultType="Student">
+        insert into student (jszh, xm, zym, xb, cssj, jss) value (#{Student.jszh}, #{Student.xm}, #{Student.zym}, #{Student.xb}, #{Student.cssj}, #{Student.jss})
+    </select>
+
+    <select id="insertStudent2" parameterType="Student" resultType="Student">
+        insert into student (jszh, xm, zym, xb, cssj, jss) value (#{jszh}, #{xm}, #{zym}, #{xb}, #{cssj}, #{jss})
+    </select>
 </mapper>
 

@@ -1,6 +1,10 @@
 import com.Config;
+import com.Dao.StudentDao;
 import com.Data.Book;
+import com.Data.Student;
 import com.Service.BookServiceImpl;
+import com.Service.StudentService;
+import com.Service.StudentServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -22,16 +26,36 @@ public class Test {
         BookServiceImpl service = context.getBean("service", BookService.class);
         Book book = context.getBean("book1", Book.class);
         Book book2 = context.getBean("book2", Book.class);
-        Book book3 = book;
-        book3.setSm("sbsshs");
-        book3.setZz("hfdjsahfkahls");
+//        Book book3 = book;
+//        book3.setSm("sbsshs");
+//        book3.setZz("hfdjsahfkahls");
+        Student std = new Student();
+        std.setJszh("20000001");
+        std.setXm("李大丽");
+        std.setXb((byte)1);
+        std.setZym("英语");
+        std.setJss("1");
+        std.setCssj("1982-01-09 00:00:00");
+        StudentService studentService = new StudentService();
+        studentService.SelectStudentByName("李");
+        studentService.DeleteStudentByjszh("20000001");
+        studentService.AddStudent(std);
+        studentService.SelectStudentByName("李");
+//        Student std = studentDao.SelectStudentByjszhParam("20000001");
+//
+//        System.out.println(std.toString());
+//        std.setXm("李大丽");
+//        studentDao.EditStudent(std);
+//        std = studentDao.SelectStudentByjszhParam("20000001");
+//        System.out.println(std.toString());
+//        studentDao.SelectStudentByName("李");
 //        Book book3 = new Book("1", "xx", "cc", "cbs");
 //        service.AddBook(book);
 //        service.SelectBook(book);
 //        service.EditBook(book, book3);
 //        service.SelectBook(book);
 //        service.DeleteBook(book);
-        service.SelectTempBook("计算机网络");
+//        service.SelectTempBook("计算机网络");
     }
 
 }

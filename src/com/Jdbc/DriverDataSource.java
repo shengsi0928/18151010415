@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 @Component("DriverData")
 public class DriverDataSource extends DriverManagerDataSource {
-    @Value("com.mysql.jdbc.Driver")
+    @Value("com.mysql.cj.jdbc.Driver")
     private String driverClassName;
     @Value("jdbc:mysql://localhost:3306/xsbook?useUnicode=true&characterEncoding=utf8")
     private String url;
