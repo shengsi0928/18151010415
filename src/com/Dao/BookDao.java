@@ -186,7 +186,6 @@ public class BookDao implements BookDaoImpl {
     public void EditBook(Book book1, Book book2) {
         SqlSession session = GetSession();
         int state = 0;
-        String sql = "update book set sm = ?where isbn = ?";
         try {
             state = session.update("updateBook", book1);
         } catch (Exception e) {
